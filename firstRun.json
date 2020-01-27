@@ -1,0 +1,83 @@
+{
+  "executionTime" : 124,
+  "stdout_visibility" : "visible",
+  "tests" : [ {
+    "name" : "ColumnSumNarrowBench:correctness",
+    "score" : 3.0,
+    "max_score" : 3.0,
+    "visibility" : "visible",
+    "output" : "Results: 511316437,511316437,511316437"
+  }, {
+    "name" : "ColumnSumWideBench:correctness",
+    "score" : 3.0,
+    "max_score" : 3.0,
+    "visibility" : "visible",
+    "output" : "Results: 510987351,510987351,510987351"
+  }, {
+    "name" : "PredicatedAllColumnsSumBench:correctness",
+    "score" : 3.0,
+    "max_score" : 3.0,
+    "visibility" : "visible",
+    "output" : "Results: 4861027493,4861027493,4861027493"
+  }, {
+    "name" : "PredicatedColumnSumBench:correctness",
+    "score" : 3.0,
+    "max_score" : 3.0,
+    "visibility" : "visible",
+    "output" : "Results: 2606019,2606019,2606019"
+  }, {
+    "name" : "PredicatedUpdateBench:correctness",
+    "score" : 3.0,
+    "max_score" : 3.0,
+    "visibility" : "visible",
+    "output" : "Results: 9820,9820,9820"
+  }, {
+    "name" : "UpdatesBench:correctness",
+    "score" : 2.0,
+    "max_score" : 3.0,
+    "visibility" : "visible",
+    "output" : "Results: 49155888227,49155888227,49155069896"
+  }, {
+    "name" : "WideCustomTableBench:correctness",
+    "score" : 0.0,
+    "max_score" : 3.0,
+    "visibility" : "visible",
+    "output" : "Result: 0"
+  }, {
+    "name" : "NarrowCustomTableBench:correctness",
+    "score" : 0.0,
+    "max_score" : 3.0,
+    "visibility" : "visible",
+    "output" : "Result: 0"
+  }, {
+    "name" : "ColumnSumNarrowBench:timing",
+    "score" : 0.0,
+    "max_score" : 6.0,
+    "visibility" : "visible",
+    "output" : "Timing testIndexedTable: 3.085 < 2.500\nTiming testColumnTable: 2.849 < 2.200\nTiming testRowTable: 2.757 < 2.500\n"
+  }, {
+    "name" : "ColumnSumWideBench:timing",
+    "score" : 6.0,
+    "max_score" : 6.0,
+    "visibility" : "visible",
+    "output" : "Timing testIndexedTable: 6.077 < 12.000\nTiming testColumnTable: 2.822 < 3.000\nTiming testRowTable: 5.978 < 12.000\n"
+  }, {
+    "name" : "PredicatedUpdateBench:timing",
+    "score" : 4.0,
+    "max_score" : 6.0,
+    "visibility" : "visible",
+    "output" : "Timing testIndexedTable: 1.047 < 1.000\nTiming testColumnTable: 3.377 < 10.000\nTiming testRowTable: 3.706 < 10.000\n"
+  }, {
+    "name" : "PredicatedAllColumnsSumBench:timing",
+    "score" : 2.0,
+    "max_score" : 6.0,
+    "visibility" : "visible",
+    "output" : "Timing testIndexedTable: 31.981 < 24.000\nTiming testColumnTable: 33.442 < 45.000\nTiming testRowTable: 24.649 < 24.000\n"
+  }, {
+    "name" : "PredicatedColumnSumBench:timing",
+    "score" : 6.0,
+    "max_score" : 6.0,
+    "visibility" : "visible",
+    "output" : "Timing testIndexedTable: 0.745 < 1.000\nTiming testColumnTable: 8.987 < 10.000\nTiming testRowTable: 9.737 < 10.000\n"
+  } ]
+}

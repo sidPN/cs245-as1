@@ -1,0 +1,14 @@
+*.class
+
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.iml
+
+.DS_Store
+.settings
+.project
+.classpath
+.json

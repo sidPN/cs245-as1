@@ -46,8 +46,8 @@ public class RowTable implements Table {
      */
     @Override
     public int getIntField(int rowId, int colId) {
-        // TODO: Implement this!
-        return 0;
+        int offset = ByteFormat.FIELD_LEN * ((rowId * numCols) + colId);
+        return rows.getInt(offset);
     }
 
     /**
@@ -55,7 +55,8 @@ public class RowTable implements Table {
      */
     @Override
     public void putIntField(int rowId, int colId, int field) {
-        // TODO: Implement this!
+        int offset = ByteFormat.FIELD_LEN * ((rowId * numCols) + colId);
+        rows.putInt(offset, field);
     }
 
     /**
@@ -66,8 +67,11 @@ public class RowTable implements Table {
      */
     @Override
     public long columnSum() {
-        // TODO: Implement this!
-        return 0;
+        long columnSum = 0l;
+        for (int rowId = 0; rowId < numRows; rowId++) {
+            columnSum += getIntField(rowId, 0);
+        }
+        return columnSum;
     }
 
     /**
@@ -79,8 +83,16 @@ public class RowTable implements Table {
      */
     @Override
     public long predicatedColumnSum(int threshold1, int threshold2) {
-        // TODO: Implement this!
-        return 0;
+        long predicatedColumnSum = 0l;
+        for (int rowId = 0; rowId < numRows; rowId++) {
+            int col1Field = getIntField(rowId, 1);
+            int cold2Field = getIntField(rowId, 2);
+            if (col1Field > threshold1 && cold2Field < threshold2) {
+                int col0Field = getIntField(rowId, 0);
+                predicatedColumnSum += (long) col0Field;
+            }
+        }
+        return predicatedColumnSum;
     }
 
     /**
@@ -91,8 +103,32 @@ public class RowTable implements Table {
      */
     @Override
     public long predicatedAllColumnsSum(int threshold) {
-        // TODO: Implement this!
-        return 0;
+        long predicatedAllColumnsSum = 0l;
+//        int colId = 0;
+//        int rowId = 0;
+//        long colSum = (long)getIntField(rowId, colId);
+//        while (colSum > threshold) {
+//            predicatedAllColumnsSum += colSum;
+//            for (colId = 1; colId < numCols; colId++) {
+//                for (++rowId; rowId < numRows; rowId++) {
+//                    colSum = (long) getIntField(rowId, colId);
+//                    predicatedAllColumnsSum += colSum;
+//                }
+//            }
+//            colId = 0;
+//            rowId++;
+//            colSum = (long)getIntField(rowId, colId);
+//        }
+        for (int rowId = 0; rowId < numRows; rowId++) {
+            long rowSum = (long)getIntField(rowId, 0);
+            if (rowSum > threshold) {
+                for (int colId = 1; colId < numCols; colId++) {
+                    rowSum += (long)getIntField(rowId, colId);
+                }
+                predicatedAllColumnsSum += rowSum;
+            }
+        }
+        return predicatedAllColumnsSum;
     }
 
     /**
@@ -103,7 +139,17 @@ public class RowTable implements Table {
      */
     @Override
     public int predicatedUpdate(int threshold) {
-        // TODO: Implement this!
-        return 0;
+        int countUpdatedRows = 0;
+        for (int rowId = 0; rowId < numRows; rowId++) {
+            int col0Field = getIntField(rowId, 0);
+            if (col0Field < threshold) {
+                int col2Field = getIntField(rowId, 2);
+                int col3Field = getIntField(rowId, 3);
+                int updateField = col3Field + col2Field;
+                putIntField(rowId,3, updateField);
+                countUpdatedRows++;
+            }
+        }
+        return countUpdatedRows;
     }
 }
