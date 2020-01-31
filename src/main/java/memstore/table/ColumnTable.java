@@ -5,6 +5,8 @@ import memstore.data.DataLoader;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.IntBuffer;
 import java.util.List;
 
 /**
@@ -68,7 +70,8 @@ public class ColumnTable implements Table {
     public long columnSum() {
         long columnSum = 0l;
         for (int rowId = 0; rowId < numRows; rowId++) {
-            columnSum += getIntField(rowId, 0);
+            int col0Value = getIntField(rowId, 0);
+            columnSum += col0Value;
         }
         return columnSum;
     }
@@ -103,13 +106,21 @@ public class ColumnTable implements Table {
     @Override
     public long predicatedAllColumnsSum(int threshold) {
         long predicatedAllColumnsSum = 0l;
-        for (int rowId = 0; rowId < numRows; rowId++) {
-            long rowSum = (long)getIntField(rowId, 0);
-            if (rowSum > threshold) {
-                for (int colId = 1; colId < numCols; colId++) {
-                    rowSum += (long)getIntField(rowId, colId);
+        int[] col0Values = new int[numRows];
+
+        for (int colId = 0; colId < numCols; colId++) {
+            for (int rowId = 0; rowId < numRows; rowId++) {
+                if (colId == 0) {
+                    int col0Value = getIntField(rowId, 0);
+                    col0Values[rowId] = col0Value;
                 }
-                predicatedAllColumnsSum += rowSum;
+                if (col0Values[rowId] > threshold) {
+                    if (colId == 0) {
+                        predicatedAllColumnsSum += col0Values[rowId];
+                    } else {
+                        predicatedAllColumnsSum += getIntField(rowId, colId);
+                    }
+                }
             }
         }
         return predicatedAllColumnsSum;

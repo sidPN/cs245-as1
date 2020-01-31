@@ -40,6 +40,6 @@ public class PredicatedUpdateTest {
     public void testIndexedTable() throws IOException {
         IndexedRowTable it = new IndexedRowTable(0);
         it.load(dl);
-        assertEquals(9, it.predicatedUpdate(3));
+            assertEquals(9, it.predicatedUpdate(3));
     }
 }

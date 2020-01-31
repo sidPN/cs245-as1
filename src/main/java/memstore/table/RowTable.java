@@ -67,12 +67,14 @@ public class RowTable implements Table {
      */
     @Override
     public long columnSum() {
-        long columnSum = 0l;
+        long columnSum = 0L;
         for (int rowId = 0; rowId < numRows; rowId++) {
-            columnSum += getIntField(rowId, 0);
+            int col0Value = getIntField(rowId, 0);
+            columnSum += col0Value;
         }
         return columnSum;
     }
+
 
     /**
      * Implements the query
@@ -104,21 +106,6 @@ public class RowTable implements Table {
     @Override
     public long predicatedAllColumnsSum(int threshold) {
         long predicatedAllColumnsSum = 0l;
-//        int colId = 0;
-//        int rowId = 0;
-//        long colSum = (long)getIntField(rowId, colId);
-//        while (colSum > threshold) {
-//            predicatedAllColumnsSum += colSum;
-//            for (colId = 1; colId < numCols; colId++) {
-//                for (++rowId; rowId < numRows; rowId++) {
-//                    colSum = (long) getIntField(rowId, colId);
-//                    predicatedAllColumnsSum += colSum;
-//                }
-//            }
-//            colId = 0;
-//            rowId++;
-//            colSum = (long)getIntField(rowId, colId);
-//        }
         for (int rowId = 0; rowId < numRows; rowId++) {
             long rowSum = (long)getIntField(rowId, 0);
             if (rowSum > threshold) {

@@ -11,4 +11,8 @@
 .settings
 .project
 .classpath
-.json
+*.json
+
+target/
+.idea/
+.eclipse
